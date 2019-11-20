@@ -11,6 +11,8 @@
 #define _MQWERTY 5
 #define _MLOWER 8
 #define _MRAISE 9
+#define _STENO 12
+#define _SRAISE 14
 #define _ADJUST 16
 
 enum preonic_keycodes {
@@ -19,6 +21,8 @@ enum preonic_keycodes {
   RAISE,
   MQWERTY,
   MLOWER,
+  STENO,
+  SRAISE,
   MRAISE
 };
 
@@ -34,7 +38,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * | Shift|   <  |   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   .  |   ,  |  -   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Ctrl | Alt  | GUI  |AltGr |Lower | Space| Enter|Raise | Left | Down |  Up  |Right |
+ * | Ctrl | GUI  | Alt  |AltGr |Lower | Space| Enter|Raise | Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
  */
 [_QWERTY] = LAYOUT_preonic_grid( \
@@ -42,7 +46,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    NO_AM,   \
   KC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    NO_AE,   NO_OSLH, \
   KC_LSFT, NO_LESS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_DOT,  KC_COMM, NO_MINS, \
-  KC_LCTL, KC_LALT, KC_LGUI, KC_ALGR, LOWER,   KC_SPC,  KC_ENT,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  \
+  KC_LCTL, KC_LGUI, KC_LALT, KC_ALGR, LOWER,   KC_SPC,  KC_ENT,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  \
 ),
 
 /* Lower
@@ -97,7 +101,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * | Shift|   <  |   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   .  |   ,  |  -   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Ctrl | Alt  | GUI  |AltGr |Lower | Space| Enter|Raise | Left | Down |  Up  |Right |
+ * | Ctrl | GUI  | Alt  |AltGr |Lower | Space| Enter|Raise | Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
  */
 [_MQWERTY] = LAYOUT_preonic_grid( \
@@ -105,7 +109,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    NO_AM,   \
   KC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    NO_AE,   NO_OSLH, \
   KC_LSFT, NO_LESS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_DOT,  KC_COMM, NO_MINS, \
-  KC_LCTL, KC_LALT, KC_LGUI, KC_ALGR, MLOWER,  KC_SPC,  KC_ENT,  MRAISE,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  \
+  KC_LCTL, KC_LGUI, KC_LALT, KC_ALGR, MLOWER,  KC_SPC,  KC_ENT,  MRAISE,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  \
 ),
 
 /* Mac Lower
@@ -150,6 +154,48 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______, _______, _______, KC_BSPC, _______, _______, _______, KC_PGDN, KC_PGUP, _______  \
 ),
 
+/* Steno
+ * ,-----------------------------------------------------------------------------------.
+ * |Qwerty|      |      |      |      |      |      |      |      |      |      |      |  todo: hotkeys, or something?
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | Esc  |      |   T  |   P  |   H  |             |   F  |   P  |   L  |   T  |  D   |
+ * |------|   S  |------+------+------|      *      |------+------+------+------+------|
+ * | Tab  |      |   K  |   W  |   R  |             |   R  |   B  |   G  |   S  |  Z   |
+ * |------+------+------+------+------+------|------+------+------+------+------+------|
+ * | Shift|   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  |RShift|
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | Ctrl | Gui  | Alt  |Raise |   A  |   O  |   E  |   U  | Left | Down |  Up  |Right |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_STENO] = LAYOUT_preonic_grid( \
+  TO(0),   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+  KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    NO_AM,   \
+  KC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    NO_AE,   NO_OSLH, \
+  KC_LSFT, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_RSFT, \
+  KC_LCTL, KC_LGUI, KC_LALT, SRAISE,  KC_C,    KC_V,    KC_N,    KC_M,    KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  \
+),
+
+/* Steno Raise
+ * ,-----------------------------------------------------------------------------------.
+ * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      | MRC  |Mouse^| MLC  |      |      |      |VolUp |      |      |      |
+ * |------+------+------+------+------+-------------+------+------+------+------+------|
+ * |      |      |Mouse<|MouseV|Mouse>|      |      |LastS |PauseP|NextS |      |      |
+ * |------+------+------+------+------+------|------+------+------+------+------+------|
+ * |      |      |ScrlDn|  MMC |ScrlUp|      |      |      |VolDwn|      |      | Reset|
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |      |Steno |      |      |      |      |      |      |      |      |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_SRAISE] = LAYOUT_preonic_grid( \
+  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  \
+  _______, _______, KC_BTN1, KC_MS_U, KC_BTN2, _______, _______, _______, KC_VOLU, _______, _______, _______, \
+  _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, _______, KC_MPRV, KC_MPLY, KC_MNXT, _______, _______, \
+  _______, _______, KC_WH_D, KC_BTN3, KC_WH_U, _______, _______, _______, KC_VOLD, _______, _______, RESET,   \
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
+),
+
 /* Adjust (Lower + Raise)
  * ,-----------------------------------------------------------------------------------.
  * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |
@@ -160,7 +206,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |      |MusOn |MusOff|      |      |      |      |NrmMode|MacMode|    |      | Reset|
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |      |      |      |      |
+ * |      |      |      |Steno |      |      |      |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
 [_ADJUST] = LAYOUT_preonic_grid( \
@@ -168,7 +214,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______, RESET,   _______, _______, _______, _______, _______, _______, _______, _______, \
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_RSFT, \
   _______, MU_ON,   MU_OFF,  _______, _______, _______, _______, TO(0),   TO(5),   _______, _______, RESET,   \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
+  _______, _______, _______, TO(12),  _______, _______, _______, _______, _______, _______, _______, _______  \
 )
 
 
@@ -243,6 +289,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           } else {
             layer_off(_MRAISE);
             update_tri_layer(_MLOWER, _MRAISE, _ADJUST);
+          }
+          return false;
+          break;
+        case STENO:
+          if (record->event.pressed) {
+            persistent_default_layer_set(1UL<<_STENO);
+          }
+          return false;
+          break;
+        case SRAISE:
+          if (record->event.pressed) {
+            layer_on(_SRAISE);
+            update_tri_layer(_SRAISE, _MRAISE, _ADJUST);
+          } else {
+            layer_off(_SRAISE);
+            update_tri_layer(_SRAISE, _MRAISE, _ADJUST);
           }
           return false;
           break;

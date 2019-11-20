@@ -1,14 +1,22 @@
 # Jacwib's preonic keymap.
 
-Designed for use with a swedish language.
+Swedish, standard-ish keyboard layout, with some extra goodies.
 
-Version 1.1:
+Still rocking the rev1 in 2019!
+
+* Version 1.2:
+
+Added steno mode, mixed some stuff up.
+
+* Version 1.1:
 
 Added PgUp and PgDn keys.
 
 Also added "Mac mode". Unsure if it even works. Might however be able to test soon.
 
-Version 1.2:
+(2019 update: it does work.)
+
+* Version 1.2:
 
 Changed around alt and super keys.
 
